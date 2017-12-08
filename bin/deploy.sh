@@ -1,6 +1,5 @@
 #!/bin/bash
 dockerrepo="nicholefrey/zensite"
-awsapp="zensite"
 if git diff-index --quiet HEAD --; then
     set -o errexit; # Exit on error
 echo Step 1/3: Archiving previous production image;
@@ -11,7 +10,7 @@ echo Step 2/3: Creating new production image;
     npm run build:prod;
     docker push $dockerrepo;
 echo Step 3/3: Creating elastic beanstalk environment;
-eb $1 $awsapp;
+eb $1;
 else
     echo Please commit your changes first.;
 fi
