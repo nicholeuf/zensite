@@ -1,0 +1,27 @@
+{
+  "name": "zensite",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "express": "^4.16.2",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-scripts": "1.0.17"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "build:prod": "docker build -t nicholefrey/zensite .",
+    "start:prod": "docker run --rm -d -p 80:80 --name running-zensite nicholefrey/zensite",
+    "stop:prod": "docker stop running-zensite",
+    "create:aws": "chmod +x ./bin/deploy.sh; ./bin/deploy.sh create",
+    "deploy:aws": "chmod +x ./bin/deploy.sh; ./bin/deploy.sh deploy"
+  },
+  "description": "This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).",
+  "main": "index.js",
+  "devDependencies": {},
+  "author": "Nichole Frey",
+  "license": "ISC"
+}
