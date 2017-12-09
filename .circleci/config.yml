@@ -22,8 +22,7 @@ jobs:
         - checkout
         - run:
             name: Deploy if tests pass and branch is Master
-            command: |
-              eb deploy --profile default
+            command: eb deploy
 
 workflows:
   version: 2
