@@ -29,7 +29,9 @@ jobs:
       steps:
         - run:
             name: Deploy if tests pass and branch is Master
-            command: eb deploy --profile default
+            command: |
+              eb use zensite --profile default
+              eb deploy --profile default
 
 workflows:
   version: 2
