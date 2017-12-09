@@ -1,6 +1,6 @@
 {
   "name": "zensite",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "dependencies": {
     "cloudinary-react": "^1.0.4",
@@ -22,7 +22,14 @@
     "stop:prod": "docker stop running-zensite",
     "lint": "./node_modules/.bin/eslint src"
   },
+  "homepage": "http://nicholefrey.com",
   "description": "Professional Website for Nichole Frey, deployed to AWS EB with CircleCI 2.0",
+  "keywords": [
+    "react",
+    "node",
+    "react-router",
+    "express"
+  ],
   "main": "index.js",
   "devDependencies": {},
   "author": "Nichole Frey",
