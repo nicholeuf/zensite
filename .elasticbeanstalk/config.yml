@@ -2,12 +2,16 @@ branch-defaults:
   master:
     environment: zensite-dev
     group_suffix: null
+environment-defaults:
+  zensite-dev:
+    branch: null
+    repository: null
 global:
   application_name: zensite
   branch: null
-  default_ec2_keyname: null
-  default_platform: Docker 1.12.6
+  default_ec2_keyname: nicholeuf
+  default_platform: Docker 17.06.2-ce
   default_region: us-east-1
   profile: null
   repository: null
-  sc: null
+  sc: git
