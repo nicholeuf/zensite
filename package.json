@@ -19,7 +19,8 @@
     "eject": "react-scripts eject",
     "build:prod": "docker build -t nicholefrey/zensite .",
     "start:prod": "docker run --rm -d -p 80:80 --name running-zensite nicholefrey/zensite",
-    "stop:prod": "docker stop running-zensite"
+    "stop:prod": "docker stop running-zensite",
+    "lint": "./node_modules/.bin/eslint src"
   },
   "description": "This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).",
   "main": "index.js",
