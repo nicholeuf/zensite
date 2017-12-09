@@ -3,19 +3,13 @@
 # Check https://circleci.com/docs/2.0/language-javascript/ for more details
 #
 version: 2
+defaults: &defaults
+  working_directory: ~/repo
+  docker:
+    - image: nicholefrey/node-boron-elastic-beanstalk:1.0
 jobs:
   build:
-    docker:
-      # specify the version you desire here
-      - image: nicholefrey/node-boron-elastic-beanstalk:1.0
-
-      # Specify service dependencies here if necessary
-      # CircleCI maintains a library of pre-built images
-      # documented at https://circleci.com/docs/2.0/circleci-images/
-      # - image: circleci/mongo:3.4.4
-
-    working_directory: ~/repo
-
+    <<: *defaults
     steps:
       - checkout
       - run: yarn install
@@ -23,9 +17,7 @@ jobs:
       - run: yarn test
       - run: npm run lint
   deploy-job:
-      docker:
-        - image: nicholefrey/node-boron-elastic-beanstalk:1.0
-      working_directory: ~/repo
+      <<: *defaults
       steps:
         - run:
             name: Deploy if tests pass and branch is Master
