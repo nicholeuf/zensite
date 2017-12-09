@@ -12,6 +12,6 @@ global:
   default_ec2_keyname: nicholeuf
   default_platform: Docker 17.06.2-ce
   default_region: us-east-1
-  profile: default
+  profile: null
   repository: null
   sc: git
