@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
 import PortfolioCard from './molecules/PortfolioCard';
 import PortfolioEntry from './molecules/PortfolioEntry';
+import TabEntry from './molecules/TabEntry';
 import YouTube from 'react-youtube';
 
 const defaultOpts = {
@@ -13,12 +14,7 @@ const stack = [
   {
     title: 'Company Introduction',
     videoId: 'nibWocj9A5Q',
-    opts: {
-      ...defaultOpts,
-      playerVars: { // https://developers.google.com/youtube/player_parameters
-        autoplay: 1
-      }
-    }
+    opts: defaultOpts
   },
   {
     title: 'Product Overview',
@@ -30,14 +26,30 @@ const stack = [
     videoId: 'eK7IqRPQbYw',
     opts: defaultOpts
   }
-]
+];
 
-const Portfolio = ({ repo }) => {
-  return (
-    <section className="section">
-      <Helmet title="Portfolio" />
-      <h1 className="title">Portfolio</h1>
+const DTDO = 'dtdo';
+const ZENSITE = 'zensite';
 
+const tabs = {
+  [DTDO]: 'Door to Door Organics',
+  [ZENSITE]: 'Website'
+};
+
+class Portfolio extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      index: 0
+    };
+  }
+
+  onChangeTab = (index) => {
+    this.setState({ index });
+  }
+
+  renderDTDOEntry = () => {
+    return (
       <PortfolioEntry title="Door to Door Organics">
         <p>
           During my three and a half years with the company, I worked my way up from a Sr. Java Developer to the Lead
@@ -45,12 +57,12 @@ const Portfolio = ({ repo }) => {
           where I continued to work in a lead role on our Front-End stack.
         </p>
         <p>
-          I started at the company as a Sr. Software Engineer with a background in Enterprise Java, but fell in love with JavaScript and React at this job.  In addition,
+          I started at the company with a background in Enterprise Java, but fell in love with JavaScript and React at this job.  In addition,
           I worked on several of our Node Micro-Services, Internal Tools, and contributed to the transition of our user base to the new platform.
         </p>
         <p>
           I introduced sagas for achieving complex user interactions and reselect for performant access to our
-          redux architecture.  We used JWT for authentication and our stack was hosted on AWS EB and CircleCI was used for build automation and deployment.
+          redux architecture.  We used JWT for authentication and our stack was hosted on Amazon Web Services (AWS) ElasticBeanstalk (EB) and CircleCI was used for build automation and deployment.
         </p>
         <p>
           Our team used slack and screenhero for paired programming and collaboration.  We were a fast-paced team
@@ -64,8 +76,13 @@ const Portfolio = ({ repo }) => {
           );
         })}
       </PortfolioEntry>
+    );
+  }
 
-      <PortfolioEntry title="Professional Website &amp; Portfolio">
+  renderZensiteEntry = () => {
+    const { repo } = this.props;
+    return (
+      <PortfolioEntry title="Professional Website & Portfolio">
         <p>
           The website you see here is hosted on Amazon Web Services (AWS) ElasticBeanstalk (EB) and deployed from
           CircleCI 2.0.  It is a responsive site built with Bulma, React, React Router, Node, and Docker.  Redux will be
@@ -75,9 +92,33 @@ const Portfolio = ({ repo }) => {
           Take a look at the <a href={repo}>source</a> if you are interested.
         </p>
       </PortfolioEntry>
+    );
+  }
 
-    </section>
-  );
+  render() {
+    const tabOrder = Object.keys(tabs);
+    return (
+      <section className="section">
+        <Helmet title="Portfolio" />
+        <h1 className="title">Portfolio</h1>
+        <div class="tabs">
+          <ul>
+            {tabOrder.map((key, i) => {
+              return (
+                <TabEntry
+                  isActive={i === this.state.index}
+                  title={tabs[key]}
+                  index={i}
+                  onClick={this.onChangeTab}
+                />
+              );
+            })}
+          </ul>
+        </div>
+        {tabOrder.indexOf(DTDO) === this.state.index ? this.renderDTDOEntry() : this.renderZensiteEntry()}
+      </section>
+    );
+  }
 }
 
 Portfolio.propTypes = {
