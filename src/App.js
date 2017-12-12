@@ -26,7 +26,7 @@ class App extends Component {
             <Header />
             <main role="main" className="container is-fluid">
               <Route exact path="/portfolio" component={Portfolio} />
-              <Route path="/" component={Home} />
+              <Route exact path="/" component={Home} />
             </main>
             <Footer />
           </article>
